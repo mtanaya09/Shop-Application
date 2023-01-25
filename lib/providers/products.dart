@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'product.dart';
+import './product.dart';
+import '../models/http_exception.dart';
 
 class Products with ChangeNotifier {
   List<Product> _items = [
@@ -134,13 +135,14 @@ class Products with ChangeNotifier {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
       final url = Uri.parse(
-        'https://flutter2023-e1efe-default-rtdb.firebaseio.com/products/$id.json');
-        await http.patch(url, body: json.encode({
-          'title': newProduct.title,
-          'description': newProduct.description,
-          'imageUrl': newProduct.imageUrl,
-          'price': newProduct.price,
-        }));
+          'https://flutter2023-e1efe-default-rtdb.firebaseio.com/products/$id.json');
+      await http.patch(url,
+          body: json.encode({
+            'title': newProduct.title,
+            'description': newProduct.description,
+            'imageUrl': newProduct.imageUrl,
+            'price': newProduct.price,
+          }));
       _items[prodIndex] = newProduct;
       notifyListeners();
     } else {
@@ -149,8 +151,20 @@ class Products with ChangeNotifier {
   }
 
   //for deleting a product
-  void deleteProduct(String id) {
-    _items.removeWhere((prod) => prod.id == id);
+  Future<void> deleteProduct(String id) async {
+    final url = Uri.parse(
+        'https://flutter2023-e1efe-default-rtdb.firebaseio.com/products/$id.json');
+    final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
+    var existingProduct = _items[existingProductIndex];
+    _items.removeAt(existingProductIndex);
     notifyListeners();
+    final response = await http.delete(url);
+    // print(response.statusCode); //log the error statuscode
+    if (response.statusCode >= 400) {
+      _items.insert(existingProductIndex, existingProduct);
+      notifyListeners();
+      throw HttpException('Could not delete the product.');
+    }
+    existingProduct = null;
   }
 }

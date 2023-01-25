@@ -70,23 +70,22 @@ class Products with ChangeNotifier {
   // }
 
   //adding loading or future to the lis of porduct
-  Future<void> addProduct(Product product) {
+  Future<void> addProduct(Product product) async {
     //Firebase request starts here
     final url = Uri.parse(
-        'https://flutter2023-e1efe-default-rtdb.firebaseio.com/products.json');
-    return http
-        .post(
-      url,
-      body: json.encode({
-        'title': product.title,
-        'description': product.description,
-        'imageUrl': product.imageUrl,
-        'price': product.price,
-        'isFavorite': product.isFavorite,
-      }),
-    )
-        .then((response) {
-      print(json.decode(response.body));
+        'https://flutter2023-e1efe-default-rtdb.firebaseio.com/products');
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          'title': product.title,
+          'description': product.description,
+          'imageUrl': product.imageUrl,
+          'price': product.price,
+          'isFavorite': product.isFavorite,
+        }),
+      );
+      // print(json.decode(response.body));
       final newProduct = Product(
         title: product.title,
         description: product.description,
@@ -97,10 +96,10 @@ class Products with ChangeNotifier {
       _items.add(newProduct);
       // _items.insert(0, newProduct); //at the start of the list
       notifyListeners();
-    }).catchError((error) {
+    } catch (error) {
       print(error);
       throw error;
-    });
+    }
   }
 
   //for the update of the product

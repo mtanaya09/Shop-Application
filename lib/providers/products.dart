@@ -69,11 +69,12 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void addProduct(Product product) {
+  //adding loading or future to the lis of porduct
+  Future<void> addProduct(Product product) {
     //Firebase request starts here
     final url = Uri.parse(
         'https://flutter2023-e1efe-default-rtdb.firebaseio.com/products.json');
-    http
+    return http
         .post(
       url,
       body: json.encode({

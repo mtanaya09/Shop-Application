@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fourth_app/screens/products_overview_screen.dart';
 import 'package:provider/provider.dart';
 import './screens/product_detail_screen.dart';
 import './screens/cart_screen.dart';
@@ -34,21 +35,23 @@ class MyApp extends StatelessWidget {
           create: (ctx) => Orders(),
         ),
       ],
-      child: MaterialApp(
-        title: 'Fourth App',
-        theme: ThemeData(
-          fontFamily: 'Lato',
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-              .copyWith(secondary: Colors.deepOrange),
+      child: Consumer<Auth>(
+        builder: (ctx, auth, _) => MaterialApp(
+          title: 'Fourth App',
+          theme: ThemeData(
+            fontFamily: 'Lato',
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+                .copyWith(secondary: Colors.deepOrange),
+          ),
+          home: auth.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+          routes: {
+            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+            CartScreen.routeName: (ctx) => CartScreen(),
+            OrdersScreen.routeName: (ctx) => OrdersScreen(),
+            UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
+            EditProductScreen.routeName: (ctx) => EditProductScreen(),
+          },
         ),
-        home: AuthScreen(),
-        routes: {
-          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-          CartScreen.routeName: (ctx) => CartScreen(),
-          OrdersScreen.routeName: (ctx) => OrdersScreen(),
-          UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
-          EditProductScreen.routeName: (ctx) => EditProductScreen(),
-        },
       ),
     );
   }

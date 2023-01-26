@@ -279,4 +279,3 @@ class _AuthCardState extends State<AuthCard> {
     );
   }
 }
-

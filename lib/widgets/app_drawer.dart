@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../screens/orders_screen.dart';
 import '../screens/user_products_screen.dart';
 import '../providers/auth.dart';
-import '../helpers/custom.route.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -12,12 +11,13 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: Text('Yooo'),
+            title: Text('Hello, Welcome!'),
             automaticallyImplyLeading: false,
           ),
           Divider(),
           ListTile(
             leading: Icon(Icons.local_mall_outlined),
+            iconColor: Theme.of(context).colorScheme.primary,
             title: Text('Shop'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
@@ -26,6 +26,7 @@ class AppDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             leading: Icon(Icons.payment),
+            iconColor: Theme.of(context).colorScheme.primary,
             title: Text('Orders'),
             onTap: () {
               Navigator.of(context)
@@ -40,23 +41,35 @@ class AppDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             leading: Icon(Icons.edit),
-            title: Text('Manage Products'),
+            iconColor: Theme.of(context).colorScheme.primary,
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(UserProductsScreen.routeName);
             },
+            title: Text('Manage Products'),
           ),
           Divider(),
-          ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Logout'),
-            onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pushReplacementNamed('/');
-              // Navigator.of(context)
-              //     .pushReplacementNamed(UserProductsScreen.routeName);
-              Provider.of<Auth>(context, listen: false).logout();
-            },
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(
+                bottom: 40,
+              ),
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: ListTile(
+                  leading: Icon(Icons.exit_to_app),
+                  iconColor: Theme.of(context).colorScheme.error,
+                  title: Text('Logout'),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pushReplacementNamed('/');
+                    // Navigator.of(context)
+                    //     .pushReplacementNamed(UserProductsScreen.routeName);
+                    Provider.of<Auth>(context, listen: false).logout();
+                  },
+                ),
+              ),
+            ),
           ),
         ],
       ),

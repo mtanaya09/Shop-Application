@@ -27,6 +27,7 @@ dependencies:
   intl: ^0.18.0
   http: ^0.13.5 #for http request (Firebase)
   shared_preferences: ^2.0.17
+  badges: ^1.1.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

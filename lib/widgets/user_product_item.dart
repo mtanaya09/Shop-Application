@@ -33,19 +33,42 @@ class UserProductItem extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.delete),
-              onPressed: () async {
-                try {
-                  await Provider.of<Products>(context, listen: false)
-                      .deleteProduct(id);
-                } catch (error) {
-                  scaffoldMessenger.showSnackBar(
-                    SnackBar(
-                      content: Text('Deleting failed!'),
-                    ),
-                  );
-                }
+              onPressed: () {
+                // try {
+                //   await Provider.of<Products>(context, listen: false)
+                //       .deleteProduct(id);
+                // } catch (error) {
+                //   scaffoldMessenger.showSnackBar(
+                //     SnackBar(
+                //       content: Text('Deleting failed!'),
+                //     ),
+                //   );
+                // }
+                showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                          title: Text('Are you sure?'),
+                          content: Text('Do you want to delete this product?'),
+                          actions: [
+                            TextButton(
+                              child: Text('No'),
+                              onPressed: () {
+                                Navigator.of(ctx).pop(false);
+                              },
+                            ),
+                            TextButton(
+                              child: Text('Yes'),
+                              onPressed: () async {
+                                await Provider.of<Products>(context,
+                                        listen: false)
+                                    .deleteProduct(id);
+                                Navigator.of(ctx).pop(true);
+                              },
+                            ),
+                          ],
+                        ));
               },
-              color: Theme.of(context).errorColor,
+              color: Theme.of(context).colorScheme.error,
             ),
           ],
         ),

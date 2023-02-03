@@ -13,6 +13,7 @@ enum FilterOptions {
 }
 
 class ProductsOverviewScreen extends StatefulWidget {
+  static const routeName = '/product-overview';
   @override
   State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
 }
@@ -81,6 +82,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               child: ch,
               badgeContent: Text(cart.itemCount.toString()),
               position: badges.BadgePosition.topEnd(top: 1, end: 1),
+              badgeColor: Theme.of(context).colorScheme.secondary,
             ),
             child: IconButton(
               icon: Icon(

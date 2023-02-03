@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(
         builder: (ctx, auth, _) => MaterialApp(
-          title: 'Fourth App',
+          title: 'Shop App',
           theme: ThemeData(
             fontFamily: 'Lato',
             pageTransitionsTheme: PageTransitionsTheme(

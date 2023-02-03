@@ -96,14 +96,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  hexcolor:
-    dependency: "direct main"
-    description:
-      name: hexcolor
-      sha256: "18a5abb2893692688d8a4ab89c3d888e291a989fd200e0b6062ac16632d76616"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.6"
   http:
     dependency: "direct main"
     description:

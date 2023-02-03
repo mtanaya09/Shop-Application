@@ -31,7 +31,8 @@ class ProductDetailScreen extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
                 loadedProduct.title,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.left,
+                style: TextStyle(fontSize: 18),
               ),
               background: Hero(
                 tag: loadedProduct.id,
@@ -50,7 +51,7 @@ class ProductDetailScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   width: double.infinity,
                   child: Text(
-                    'Description:',
+                    'Overview:',
                     textAlign: TextAlign.justify,
                     softWrap: true,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),

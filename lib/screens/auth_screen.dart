@@ -259,6 +259,7 @@ class _AuthCardState extends State<AuthCard>
                     if (value.isEmpty || value.length < 5) {
                       return 'Password is too short!';
                     }
+                    return value;
                   },
                   onSaved: (value) {
                     _authData['password'] = value;
@@ -285,6 +286,7 @@ class _AuthCardState extends State<AuthCard>
                                 if (value != _passwordController.text) {
                                   return 'Passwords do not match!';
                                 }
+                                return value;
                               }
                             : null,
                       ),
@@ -311,7 +313,7 @@ class _AuthCardState extends State<AuthCard>
                           EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
                       backgroundColor: Theme.of(context).colorScheme.primary,
                       foregroundColor:
-                          Theme.of(context).primaryTextTheme.button.color,
+                          Theme.of(context).primaryTextTheme.labelLarge.color,
                     ),
                   ),
                 TextButton(

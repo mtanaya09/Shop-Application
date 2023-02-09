@@ -63,6 +63,7 @@ class ProductItem extends StatelessWidget {
           title: Text(
             product.title,
             textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16),
           ),
           trailing: IconButton(
             icon: Icon(Icons.shopping_cart),

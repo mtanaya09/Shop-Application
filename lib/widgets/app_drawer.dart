@@ -21,7 +21,8 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.local_mall_outlined, size: 30),
             iconColor: Theme.of(context).colorScheme.primary,
-            title: Text('Services', style: TextStyle(fontSize: 15)),
+            title:
+                Text('Products and Services', style: TextStyle(fontSize: 15)),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
             },

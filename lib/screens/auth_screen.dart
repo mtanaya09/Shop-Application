@@ -259,7 +259,6 @@ class _AuthCardState extends State<AuthCard>
                     if (value.isEmpty || value.length < 5) {
                       return 'Password is too short!';
                     }
-                    return value;
                   },
                   onSaved: (value) {
                     _authData['password'] = value;
@@ -286,7 +285,6 @@ class _AuthCardState extends State<AuthCard>
                                 if (value != _passwordController.text) {
                                   return 'Passwords do not match!';
                                 }
-                                return value;
                               }
                             : null,
                       ),
